@@ -8,4 +8,8 @@ class Plane
     @airport == airport
   end
 
+  def taxi_to_runway
+    @airport.move_to_runway(self)
+  end
+
 end
