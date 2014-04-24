@@ -1,56 +1,56 @@
 require 'airplane'
 
-describe Plane do
+describe Airplane do
 
   let(:airport) { double :Airport }
-  let(:plane) { Plane.new(airport) }
+  let(:airplane) { Airplane.new(airport) }
 
   it 'should be parked at an airport' do
-    expect(plane).to be_parked_at(airport)
+    expect(airplane).to be_parked_at(airport)
   end
 
-  context 'While parked at an airport the plane will' do
+  context 'While parked at an airport the airplane will' do
 
   it "taxi to the runway before taking off" do
-      expect(airport).to receive(:move_to_runway).with(plane)
-      plane.taxi_to_runway
+      expect(airport).to receive(:move_to_runway).with(airplane)
+      airplane.taxi_to_runway
     end
 
 
   it 'take off with clearance' do
-      expect(airport).to receive(:move_to_runway).with(plane)
+      expect(airport).to receive(:move_to_runway).with(airplane)
       expect(airport).to receive(:clear_for_take_off?).and_return true
-      plane.take_off
+      airplane.take_off
 
-      expect(plane).not_to be_parked_at(airport)
+      expect(airplane).not_to be_parked_at(airport)
   end
 
   it 'not take off without clearance' do
-      expect(airport).to receive(:move_to_runway).with(plane)
+      expect(airport).to receive(:move_to_runway).with(airplane)
       expect(airport).to receive(:clear_for_take_off?).and_return false
-      plane.take_off
+      airplane.take_off
 
-      expect(plane).to be_parked_at(airport)
+      expect(airplane).to be_parked_at(airport)
   end
 
 end   
    
-  context 'While airborne the plane can' do
+  context 'While airborne the airplane can' do
 
-  let(:plane) { Plane.new(nil) }
+  let(:airplane) { Airplane.new(nil) }
 
   it 'land at an airport with clearance' do
       expect(airport).to receive(:clear_for_landing?).and_return true
-      plane.land_at(airport)
+      airplane.land_at(airport)
 
-      expect(plane).to be_parked_at(airport)
+      expect(airplane).to be_parked_at(airport)
   end
 
   it 'not land without clearance' do
       expect(airport).to receive(:clear_for_landing?).and_return false
-      plane.land_at(airport)
+      airplane.land_at(airport)
 
-      expect(plane).not_to be_parked_at(airport)
+      expect(airplane).not_to be_parked_at(airport)
   end
 
 end

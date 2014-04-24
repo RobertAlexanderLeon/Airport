@@ -1,4 +1,4 @@
-class Plane
+class Airplane
 
   def initialize(airport)
     @airport = airport
